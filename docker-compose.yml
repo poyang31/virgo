@@ -1,0 +1,33 @@
+version: "3"
+services:
+  mysql:
+    image: mariadb:10
+    container_name: virgo-mysql
+    ports:
+      - 127.0.0.1:9020:3306
+    volumes:
+      - mysql:/var/lib/mysql:rw
+    networks:
+      - virgo
+    environment:
+      MARIADB_ROOT_PASSWORD: virgo
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5
+    container_name: virgo-phpmyadmin
+    ports:
+      - 127.0.0.1:9021:80
+    networks:
+      - virgo
+    environment:
+      PMA_HOST: "virgo-mysql"
+    restart: always
+
+volumes:
+  mysql:
+    driver: local
+
+networks:
+  virgo:
+    driver: bridge
