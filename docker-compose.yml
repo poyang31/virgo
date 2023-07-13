@@ -1,7 +1,7 @@
 version: "3"
 services:
   mysql:
-    image: mariadb:10
+    image: mysql:8
     container_name: virgo-mysql
     ports:
       - 127.0.0.1:9020:3306
@@ -10,7 +10,7 @@ services:
     networks:
       - virgo
     environment:
-      MARIADB_ROOT_PASSWORD: virgo
+      MYSQL_ROOT_PASSWORD: virgo
     restart: always
 
   phpmyadmin:
